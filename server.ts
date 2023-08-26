@@ -44,7 +44,7 @@ export function app(): express.Express {
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // https://api.ValidEmail.net/?email=EMAIL&token=69d372749aa94cb793fb75905608642f
-  server.post('/api/validate', async (req, res) => {
+  server.post('/tools/api/validate', async (req, res) => {
     const db = await client.db('validemaildb');
     const coll = db.collection('emailook');
     console.log(req.headers.cookie);

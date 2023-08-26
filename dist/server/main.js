@@ -74,7 +74,7 @@ function app() {
   // Example Express Rest API endpoints
   // server.get('/api/**', (req, res) => { });
   // https://api.ValidEmail.net/?email=EMAIL&token=69d372749aa94cb793fb75905608642f
-  server.post('/api/validate', /*#__PURE__*/function () {
+  server.post('/tools/api/validate', /*#__PURE__*/function () {
     var _ref = (0,_Users_abhay_Projects_Clodura_lab_verifyinbox_io_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* (req, res) {
       const db = yield client.db('validemaildb');
       const coll = db.collection('emailook');
