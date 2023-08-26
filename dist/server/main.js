@@ -849,7 +849,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 59936);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 34228);
 /* harmony import */ var _services_seo_seo_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../services/seo/seo.service */ 88262);
-/* harmony import */ var ngx_captcha__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-captcha */ 26926);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ 41081);
+/* harmony import */ var ngx_captcha__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-captcha */ 26926);
+
 
 
 
@@ -1209,10 +1211,14 @@ function HomeComponent_div_16_Template(rf, ctx) {
   }
 }
 class HomeComponent {
-  constructor(platformId, seoService, formBuilder, cdr) {
+  constructor(platformId, seoService, formBuilder, cdr, dom, meta, rf2, seoSvc) {
     this.seoService = seoService;
     this.formBuilder = formBuilder;
     this.cdr = cdr;
+    this.dom = dom;
+    this.meta = meta;
+    this.rf2 = rf2;
+    this.seoSvc = seoSvc;
     this.siteKey = _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.application.gtwoSiteKey;
     this.captchaIsLoaded = false;
     this.captchaSuccess = false;
@@ -1239,6 +1245,16 @@ class HomeComponent {
       btnLabel: 'Verify Email'
     };
     this.formModel = {};
+    this.renderer = rf2.createRenderer(null, null);
+    this.seoSvc.setMetaTitle(`Free Email Verifier Tool | Instantly Verify Email Addresses | Clodura.AI`);
+    this.seoSvc.setMetaOrgTitle(`Free Email Verifier Tool | Instantly Verify Email Addresses | Clodura.AI`);
+    this.seoSvc.setMetaDescription(`Clean and validate your email list with Clodura.AI’s free email verifier tool. Instantly verify email addresses for better deliverability, engagement, and cost savings. No sign-up required.`);
+    this.seoSvc.setMetaOrgDesc(`Clean and validate your email list with Clodura.AI’s free email verifier tool. Instantly verify email addresses for better deliverability, engagement, and cost savings. No sign-up required.`);
+    this.seoSvc.setMetaKey(`
+          email verifier, free email verifier, verify email addresses, email validation, clean email list, bulk email verification, improve deliverability, email marketing, validate emails, email list cleaning, email verification tool, check email validity.
+          `);
+    this.createCanonicalURL();
+    this.updateHrefLangs(`https://www.clodura.ai/tools/email-verifier`);
     this.isBrowser = (0,_angular_common__WEBPACK_IMPORTED_MODULE_3__.isPlatformBrowser)(platformId);
     this.aFormGroup = this.formBuilder.group({
       recaptcha: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__.Validators.required],
@@ -1304,9 +1320,31 @@ class HomeComponent {
     this.captchaIsExpired = true;
     this.cdr.detectChanges();
   }
+  createCanonicalURL() {
+    const head = this.dom.getElementsByTagName('head')[0];
+    let element = this.dom.querySelector(`link[rel='canonical']`) || null;
+    if (element == null) {
+      element = this.dom.createElement('link');
+      head.appendChild(element);
+    }
+    element.setAttribute('rel', 'canonical');
+    element.setAttribute('href', 'https://www.clodura.ai/tools/email-verifier');
+  }
+  updateHrefLangs(url) {
+    // let link: HTMLLinkElement = this.dom.createElement("link");
+    // link.setAttribute("rel", "canonical");
+    // this.dom.head.appendChild(link);
+    // link.setAttribute("href", this.dom.URL.replace("http://", "https://"));
+    // console.log(link, this.dom.URL);
+    const arr = Array.from(this.dom.head.children);
+    const linkElt = arr.find(e => e['rel'] === 'alternate' && e['hreflang'] === 'x-default');
+    const linkElten = arr.find(e => e['rel'] === 'alternate' && e['hreflang'] === 'en');
+    this.renderer.setAttribute(linkElten, 'href', url);
+    this.renderer.setAttribute(linkElt, 'href', url);
+  }
 }
 HomeComponent.ɵfac = function HomeComponent_Factory(t) {
-  return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_2__.PLATFORM_ID), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_services_seo_seo_service__WEBPACK_IMPORTED_MODULE_1__.SeoService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_2__.ChangeDetectorRef));
+  return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_2__.PLATFORM_ID), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_services_seo_seo_service__WEBPACK_IMPORTED_MODULE_1__.SeoService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormBuilder), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_2__.ChangeDetectorRef), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_common__WEBPACK_IMPORTED_MODULE_3__.DOCUMENT), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__.Meta), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_2__.RendererFactory2), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_services_seo_seo_service__WEBPACK_IMPORTED_MODULE_1__.SeoService));
 };
 HomeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
   type: HomeComponent,
@@ -1550,7 +1588,7 @@ HomeComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["�
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", !ctx.loadnsub.loading && !ctx.loadnsub.submit && ctx.valresp);
     }
   },
-  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgClass, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatusGroup, ngx_captcha__WEBPACK_IMPORTED_MODULE_5__.ReCaptcha2Component, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_3__.TitleCasePipe],
+  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgClass, _angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ɵNgNoValidate"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatusGroup, ngx_captcha__WEBPACK_IMPORTED_MODULE_6__.ReCaptcha2Component, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormGroupDirective, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.FormControlName, _angular_common__WEBPACK_IMPORTED_MODULE_3__.TitleCasePipe],
   styles: [".bkg[_ngcontent-%COMP%] {\n  background-image: url('https://storage.googleapis.com/clodura-sitemap-app-01/statassets/assets/params/images/images/validback.jpg') !important;\n  \n\n  background-size: 100%;\n  background-repeat: no-repeat;\n}\n\n.bg-gray-clodura[_ngcontent-%COMP%] {\n  background-color: rgba(225, 229, 242, .7) !important;\n}\n\n.bg-one[_ngcontent-%COMP%] {\n  background-color: #edf2fb !important\n}\n\n.bg-two[_ngcontent-%COMP%] {\n  background-color: #d7e3fc !important\n}\n\n.bg-three[_ngcontent-%COMP%] {\n  background-color: #b6ccfe !important\n}\n\n.bg-four[_ngcontent-%COMP%] {\n  background-color: #abc4ff !important\n}\n\n\n\n.bg-magnolia[_ngcontent-%COMP%] { background-color: #eae4e9ff !important;}\n.bg-linen[_ngcontent-%COMP%] { background-color: #fff1e6ff !important;}\n.bg-misty-rose[_ngcontent-%COMP%] { background-color: #fde2e4ff !important;}\n.bg-mimi-pink[_ngcontent-%COMP%] { background-color: #fad2e1ff !important;}\n.bg-mint-cream[_ngcontent-%COMP%] { background-color: #e2ece9ff !important;}\n.bg-light-blue[_ngcontent-%COMP%] { background-color: #bee1e6ff !important;}\n.bg-isabelline[_ngcontent-%COMP%] { background-color: #f0efebff !important;}\n.bg-lavender-web[_ngcontent-%COMP%] { background-color: #dfe7fdff !important;}\n.bg-periwinkle[_ngcontent-%COMP%] { background-color: #cddafdff !important;}\n\n.text-32[_ngcontent-%COMP%] {\n  font-size: 32px !important;\n}\n\n.text-42-100[_ngcontent-%COMP%] {\n  font-size: 42px !important;\n  font-weight: 100 !important;\n}\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvbW9kdWxlcy9nZW5lcmFsL2hvbWUvaG9tZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUdBO0VBQ0UsOElBQThJO0VBQzlJLDJCQUEyQjtFQUMzQixxQkFBcUI7RUFDckIsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0Usb0RBQW9EO0FBQ3REOztBQUVBO0VBQ0U7QUFDRjs7QUFFQTtFQUNFO0FBQ0Y7O0FBRUE7RUFDRTtBQUNGOztBQUVBO0VBQ0U7QUFDRjs7QUFFQSxZQUFZO0FBQ1osZUFBZSxzQ0FBc0MsQ0FBQztBQUN0RCxZQUFZLHNDQUFzQyxDQUFDO0FBQ25ELGlCQUFpQixzQ0FBc0MsQ0FBQztBQUN4RCxnQkFBZ0Isc0NBQXNDLENBQUM7QUFDdkQsaUJBQWlCLHNDQUFzQyxDQUFDO0FBQ3hELGlCQUFpQixzQ0FBc0MsQ0FBQztBQUN4RCxpQkFBaUIsc0NBQXNDLENBQUM7QUFDeEQsbUJBQW1CLHNDQUFzQyxDQUFDO0FBQzFELGlCQUFpQixzQ0FBc0MsQ0FBQzs7QUFFeEQ7RUFDRSwwQkFBMEI7QUFDNUI7O0FBRUE7RUFDRSwwQkFBMEI7RUFDMUIsMkJBQTJCO0FBQzdCIiwic291cmNlc0NvbnRlbnQiOlsiXG5cblxuLmJrZyB7XG4gIGJhY2tncm91bmQtaW1hZ2U6IHVybCgnaHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL2Nsb2R1cmEtc2l0ZW1hcC1hcHAtMDEvc3RhdGFzc2V0cy9hc3NldHMvcGFyYW1zL2ltYWdlcy9pbWFnZXMvdmFsaWRiYWNrLmpwZycpICFpbXBvcnRhbnQ7XG4gIC8qIGJhY2tncm91bmQtcG9zaXRpb246IDsgKi9cbiAgYmFja2dyb3VuZC1zaXplOiAxMDAlO1xuICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xufVxuXG4uYmctZ3JheS1jbG9kdXJhIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyMjUsIDIyOSwgMjQyLCAuNykgIWltcG9ydGFudDtcbn1cblxuLmJnLW9uZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZGYyZmIgIWltcG9ydGFudFxufVxuXG4uYmctdHdvIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2Q3ZTNmYyAhaW1wb3J0YW50XG59XG5cbi5iZy10aHJlZSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNiNmNjZmUgIWltcG9ydGFudFxufVxuXG4uYmctZm91ciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNhYmM0ZmYgIWltcG9ydGFudFxufVxuXG4vKiBDU1MgSEVYICovXG4uYmctbWFnbm9saWEgeyBiYWNrZ3JvdW5kLWNvbG9yOiAjZWFlNGU5ZmYgIWltcG9ydGFudDt9XG4uYmctbGluZW4geyBiYWNrZ3JvdW5kLWNvbG9yOiAjZmZmMWU2ZmYgIWltcG9ydGFudDt9XG4uYmctbWlzdHktcm9zZSB7IGJhY2tncm91bmQtY29sb3I6ICNmZGUyZTRmZiAhaW1wb3J0YW50O31cbi5iZy1taW1pLXBpbmsgeyBiYWNrZ3JvdW5kLWNvbG9yOiAjZmFkMmUxZmYgIWltcG9ydGFudDt9XG4uYmctbWludC1jcmVhbSB7IGJhY2tncm91bmQtY29sb3I6ICNlMmVjZTlmZiAhaW1wb3J0YW50O31cbi5iZy1saWdodC1ibHVlIHsgYmFja2dyb3VuZC1jb2xvcjogI2JlZTFlNmZmICFpbXBvcnRhbnQ7fVxuLmJnLWlzYWJlbGxpbmUgeyBiYWNrZ3JvdW5kLWNvbG9yOiAjZjBlZmViZmYgIWltcG9ydGFudDt9XG4uYmctbGF2ZW5kZXItd2ViIHsgYmFja2dyb3VuZC1jb2xvcjogI2RmZTdmZGZmICFpbXBvcnRhbnQ7fVxuLmJnLXBlcml3aW5rbGUgeyBiYWNrZ3JvdW5kLWNvbG9yOiAjY2RkYWZkZmYgIWltcG9ydGFudDt9XG5cbi50ZXh0LTMyIHtcbiAgZm9udC1zaXplOiAzMnB4ICFpbXBvcnRhbnQ7XG59XG5cbi50ZXh0LTQyLTEwMCB7XG4gIGZvbnQtc2l6ZTogNDJweCAhaW1wb3J0YW50O1xuICBmb250LXdlaWdodDogMTAwICFpbXBvcnRhbnQ7XG59XG4iXSwic291cmNlUm9vdCI6IiJ9 */"]
 });
 
@@ -1568,15 +1606,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   LandingComponent: () => (/* binding */ LandingComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 59936);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 34228);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 59936);
+/* harmony import */ var src_app_services_seo_seo_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/services/seo/seo.service */ 88262);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/platform-browser */ 41081);
+
+
+
 
 class LandingComponent {
-  constructor() {}
+  constructor(seoSvc, dom, meta, rf2) {
+    this.seoSvc = seoSvc;
+    this.dom = dom;
+    this.meta = meta;
+    this.rf2 = rf2;
+    this.renderer = rf2.createRenderer(null, null);
+    this.seoSvc.setMetaTitle(`Leadgen Tools, Free Tools, Sales Tools, Lead Tools | Clodura.AI`);
+    this.seoSvc.setMetaOrgTitle(`Leadgen Tools, Free Tools, Sales Tools, Lead Tools | Clodura.AI`);
+    this.seoSvc.setMetaDescription(`Free and AI-powered lead generation tools, such as Clodura.AI, can be used to identify and qualify potential customers, generate personalized content, and verify the accuracy of contact information. These tools can be a valuable resource for businesses of all sizes, regardless of their budget or experience.`);
+    this.seoSvc.setMetaOrgDesc(`Free and AI-powered lead generation tools, such as Clodura.AI, can be used to identify and qualify potential customers, generate personalized content, and verify the accuracy of contact information. These tools can be a valuable resource for businesses of all sizes, regardless of their budget or experience.`);
+    this.seoSvc.setMetaKey(`
+          Sales Tools, Lead Generation Tools, LeadGen Tools, Free Tools, Sales Tools, Free Sales Tools, AI Powered, AI Powered LeadGen Tools, Verification Tools, Content Generation, Clodura.AI, Email Validation, Built With, email verifier, free email verifier, verify email addresses, email validation, clean email list, bulk email verification, improve deliverability, email marketing, validate emails, email list cleaning, email verification tool, check email validity.
+          `);
+    this.createCanonicalURL();
+    this.updateHrefLangs(`https://www.clodura.ai/tools`);
+  }
+  createCanonicalURL() {
+    const head = this.dom.getElementsByTagName('head')[0];
+    let element = this.dom.querySelector(`link[rel='canonical']`) || null;
+    if (element == null) {
+      element = this.dom.createElement('link');
+      head.appendChild(element);
+    }
+    element.setAttribute('rel', 'canonical');
+    element.setAttribute('href', 'https://www.clodura.ai/tools');
+  }
+  updateHrefLangs(url) {
+    // let link: HTMLLinkElement = this.dom.createElement("link");
+    // link.setAttribute("rel", "canonical");
+    // this.dom.head.appendChild(link);
+    // link.setAttribute("href", this.dom.URL.replace("http://", "https://"));
+    // console.log(link, this.dom.URL);
+    const arr = Array.from(this.dom.head.children);
+    const linkElt = arr.find(e => e['rel'] === 'alternate' && e['hreflang'] === 'x-default');
+    const linkElten = arr.find(e => e['rel'] === 'alternate' && e['hreflang'] === 'en');
+    this.renderer.setAttribute(linkElten, 'href', url);
+    this.renderer.setAttribute(linkElt, 'href', url);
+  }
 }
 LandingComponent.ɵfac = function LandingComponent_Factory(t) {
-  return new (t || LandingComponent)();
+  return new (t || LandingComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_seo_seo_service__WEBPACK_IMPORTED_MODULE_0__.SeoService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_common__WEBPACK_IMPORTED_MODULE_2__.DOCUMENT), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__.Meta), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__.RendererFactory2));
 };
-LandingComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+LandingComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
   type: LandingComponent,
   selectors: [["app-home"]],
   decls: 83,
@@ -1584,74 +1665,74 @@ LandingComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__
   consts: [[1, "container"], [1, "row", "my-5", "bg-one", "shadow", "shadow-md", "rounded"], [1, "col-2", "float-end", "my-auto"], ["src", "https://storage.googleapis.com/clodura-sitemap-app-01/statassets/assets/params/images/images/toolsicon.png", "alt", "toolsicon", "height", "64px", 1, "float-end"], [1, "col-8"], [1, "card", "bg-transparent", "border-0"], [1, "card-body"], [1, "col-2"], [1, "row", "mt-5", "mb-5"], [1, "col-4", "my-2", "d-flex", "align-items-stretch"], ["href", "/tools/email-verifier"], [1, "card", "pointer", "bg-linen"], [1, "card-title"], [1, "card-text", "text-14"], [1, "card", "w-100"], [1, "my-5"]],
   template: function LandingComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "img", 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 4)(5, "div", 5)(6, "div", 6)(7, "h1");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "Free Resources / Tools");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "h5");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, " Generate Leads and Close Deals Faster with AI-Powered Free Tools ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](11, "div", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "div", 8)(13, "div", 9)(14, "a", 10)(15, "div", 11)(16, "div", 6)(17, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "Email Verifier");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20, " Verify emails with our fast and powerful Email Verifying engine. ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "div", 9)(22, "div", 14)(23, "div", 6)(24, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](25, "Coming Soon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "div", 9)(29, "div", 14)(30, "div", 6)(31, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, "Coming Soon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](34, "\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](35, "div", 9)(36, "div", 14)(37, "div", 6)(38, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](39, "Coming Soon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](40, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](41, "\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](42, "div", 9)(43, "div", 14)(44, "div", 6)(45, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](46, "Coming Soon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](47, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](48, "\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](49, "div", 9)(50, "div", 14)(51, "div", 6)(52, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](53, "Coming Soon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](54, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](55, "\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](56, "div", 9)(57, "div", 14)(58, "div", 6)(59, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](60, "Coming Soon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](61, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](62, "\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](63, "div", 9)(64, "div", 14)(65, "div", 6)(66, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](67, "Coming Soon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](68, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](69, "\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](70, "div", 9)(71, "div", 14)(72, "div", 6)(73, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](74, "Coming Soon");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](75, "p", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](76, "\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](77, "div", 15);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](78, "br")(79, "br")(80, "br")(81, "br")(82, "br");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "img", 3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "div", 4)(5, "div", 5)(6, "div", 6)(7, "h1");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8, "Free Resources / Tools");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "h5");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, " Generate Leads and Close Deals Faster with AI-Powered Free Tools ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](11, "div", 7);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "div", 8)(13, "div", 9)(14, "a", 10)(15, "div", 11)(16, "div", 6)(17, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](18, "Email Verifier");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](19, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](20, " Verify emails with our fast and powerful Email Verifying engine. ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "div", 9)(22, "div", 14)(23, "div", 6)(24, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](25, "Coming Soon");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](27, "\u00A0");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](28, "div", 9)(29, "div", 14)(30, "div", 6)(31, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](32, "Coming Soon");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](33, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](34, "\u00A0");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "div", 9)(36, "div", 14)(37, "div", 6)(38, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](39, "Coming Soon");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](41, "\u00A0");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](42, "div", 9)(43, "div", 14)(44, "div", 6)(45, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](46, "Coming Soon");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](47, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](48, "\u00A0");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](49, "div", 9)(50, "div", 14)(51, "div", 6)(52, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](53, "Coming Soon");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](54, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](55, "\u00A0");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](56, "div", 9)(57, "div", 14)(58, "div", 6)(59, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](60, "Coming Soon");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](61, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](62, "\u00A0");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](63, "div", 9)(64, "div", 14)(65, "div", 6)(66, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](67, "Coming Soon");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](68, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](69, "\u00A0");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](70, "div", 9)(71, "div", 14)(72, "div", 6)(73, "h4", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](74, "Coming Soon");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](75, "p", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](76, "\u00A0");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](77, "div", 15);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](78, "br")(79, "br")(80, "br")(81, "br")(82, "br");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     }
   },
   styles: [".bkg[_ngcontent-%COMP%] {\n  background-image: url('https://storage.googleapis.com/clodura-sitemap-app-01/statassets/assets/params/images/images/validback.jpg') !important;\n  \n\n  background-size: 100%;\n  background-repeat: no-repeat;\n}\n\n.bg-gray-clodura[_ngcontent-%COMP%] {\n  background-color: rgba(225, 229, 242, .7) !important;\n}\n\n.bg-one[_ngcontent-%COMP%] {\n  background-color: #edf2fb !important\n}\n\n.bg-two[_ngcontent-%COMP%] {\n  background-color: #d7e3fc !important\n}\n\n.bg-three[_ngcontent-%COMP%] {\n  background-color: #b6ccfe !important\n}\n\n.bg-four[_ngcontent-%COMP%] {\n  background-color: #abc4ff !important\n}\n\n\n\n.bg-magnolia[_ngcontent-%COMP%] { background-color: #eae4e9ff !important;}\n.bg-linen[_ngcontent-%COMP%] { background-color: #fff1e6ff !important;}\n.bg-misty-rose[_ngcontent-%COMP%] { background-color: #fde2e4ff !important;}\n.bg-mimi-pink[_ngcontent-%COMP%] { background-color: #fad2e1ff !important;}\n.bg-mint-cream[_ngcontent-%COMP%] { background-color: #e2ece9ff !important;}\n.bg-light-blue[_ngcontent-%COMP%] { background-color: #bee1e6ff !important;}\n.bg-isabelline[_ngcontent-%COMP%] { background-color: #f0efebff !important;}\n.bg-lavender-web[_ngcontent-%COMP%] { background-color: #dfe7fdff !important;}\n.bg-periwinkle[_ngcontent-%COMP%] { background-color: #cddafdff !important;}\n\n.text-32[_ngcontent-%COMP%] {\n  font-size: 32px !important;\n}\n\n.text-42-100[_ngcontent-%COMP%] {\n  font-size: 42px !important;\n  font-weight: 100 !important;\n}\n\n.pointer[_ngcontent-%COMP%] {\n  cursor: pointer;\n}\n\n.pointer[_ngcontent-%COMP%]:hover {\n  cursor: pointer;\n  border-color: #ee6055  !important;\n  color: #ee6055;\n}\n\n.pointer[_ngcontent-%COMP%]:hover   h4[_ngcontent-%COMP%] {\n  color: #ee6055 !important;\n}\n\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvbW9kdWxlcy9nZW5lcmFsL2xhbmRpbmcvbGFuZGluZy5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUdBO0VBQ0UsOElBQThJO0VBQzlJLDJCQUEyQjtFQUMzQixxQkFBcUI7RUFDckIsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0Usb0RBQW9EO0FBQ3REOztBQUVBO0VBQ0U7QUFDRjs7QUFFQTtFQUNFO0FBQ0Y7O0FBRUE7RUFDRTtBQUNGOztBQUVBO0VBQ0U7QUFDRjs7QUFFQSxZQUFZO0FBQ1osZUFBZSxzQ0FBc0MsQ0FBQztBQUN0RCxZQUFZLHNDQUFzQyxDQUFDO0FBQ25ELGlCQUFpQixzQ0FBc0MsQ0FBQztBQUN4RCxnQkFBZ0Isc0NBQXNDLENBQUM7QUFDdkQsaUJBQWlCLHNDQUFzQyxDQUFDO0FBQ3hELGlCQUFpQixzQ0FBc0MsQ0FBQztBQUN4RCxpQkFBaUIsc0NBQXNDLENBQUM7QUFDeEQsbUJBQW1CLHNDQUFzQyxDQUFDO0FBQzFELGlCQUFpQixzQ0FBc0MsQ0FBQzs7QUFFeEQ7RUFDRSwwQkFBMEI7QUFDNUI7O0FBRUE7RUFDRSwwQkFBMEI7RUFDMUIsMkJBQTJCO0FBQzdCOztBQUVBO0VBQ0UsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLGVBQWU7RUFDZixpQ0FBaUM7RUFDakMsY0FBYztBQUNoQjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQiIsInNvdXJjZXNDb250ZW50IjpbIlxuXG5cbi5ia2cge1xuICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoJ2h0dHBzOi8vc3RvcmFnZS5nb29nbGVhcGlzLmNvbS9jbG9kdXJhLXNpdGVtYXAtYXBwLTAxL3N0YXRhc3NldHMvYXNzZXRzL3BhcmFtcy9pbWFnZXMvaW1hZ2VzL3ZhbGlkYmFjay5qcGcnKSAhaW1wb3J0YW50O1xuICAvKiBiYWNrZ3JvdW5kLXBvc2l0aW9uOiA7ICovXG4gIGJhY2tncm91bmQtc2l6ZTogMTAwJTtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbn1cblxuLmJnLWdyYXktY2xvZHVyYSB7XG4gIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjI1LCAyMjksIDI0MiwgLjcpICFpbXBvcnRhbnQ7XG59XG5cbi5iZy1vbmUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWRmMmZiICFpbXBvcnRhbnRcbn1cblxuLmJnLXR3byB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNkN2UzZmMgIWltcG9ydGFudFxufVxuXG4uYmctdGhyZWUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjYjZjY2ZlICFpbXBvcnRhbnRcbn1cblxuLmJnLWZvdXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjYWJjNGZmICFpbXBvcnRhbnRcbn1cblxuLyogQ1NTIEhFWCAqL1xuLmJnLW1hZ25vbGlhIHsgYmFja2dyb3VuZC1jb2xvcjogI2VhZTRlOWZmICFpbXBvcnRhbnQ7fVxuLmJnLWxpbmVuIHsgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjFlNmZmICFpbXBvcnRhbnQ7fVxuLmJnLW1pc3R5LXJvc2UgeyBiYWNrZ3JvdW5kLWNvbG9yOiAjZmRlMmU0ZmYgIWltcG9ydGFudDt9XG4uYmctbWltaS1waW5rIHsgYmFja2dyb3VuZC1jb2xvcjogI2ZhZDJlMWZmICFpbXBvcnRhbnQ7fVxuLmJnLW1pbnQtY3JlYW0geyBiYWNrZ3JvdW5kLWNvbG9yOiAjZTJlY2U5ZmYgIWltcG9ydGFudDt9XG4uYmctbGlnaHQtYmx1ZSB7IGJhY2tncm91bmQtY29sb3I6ICNiZWUxZTZmZiAhaW1wb3J0YW50O31cbi5iZy1pc2FiZWxsaW5lIHsgYmFja2dyb3VuZC1jb2xvcjogI2YwZWZlYmZmICFpbXBvcnRhbnQ7fVxuLmJnLWxhdmVuZGVyLXdlYiB7IGJhY2tncm91bmQtY29sb3I6ICNkZmU3ZmRmZiAhaW1wb3J0YW50O31cbi5iZy1wZXJpd2lua2xlIHsgYmFja2dyb3VuZC1jb2xvcjogI2NkZGFmZGZmICFpbXBvcnRhbnQ7fVxuXG4udGV4dC0zMiB7XG4gIGZvbnQtc2l6ZTogMzJweCAhaW1wb3J0YW50O1xufVxuXG4udGV4dC00Mi0xMDAge1xuICBmb250LXNpemU6IDQycHggIWltcG9ydGFudDtcbiAgZm9udC13ZWlnaHQ6IDEwMCAhaW1wb3J0YW50O1xufVxuXG4ucG9pbnRlciB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cblxuLnBvaW50ZXI6aG92ZXIge1xuICBjdXJzb3I6IHBvaW50ZXI7XG4gIGJvcmRlci1jb2xvcjogI2VlNjA1NSAgIWltcG9ydGFudDtcbiAgY29sb3I6ICNlZTYwNTU7XG59XG5cbi5wb2ludGVyOmhvdmVyIGg0IHtcbiAgY29sb3I6ICNlZTYwNTUgIWltcG9ydGFudDtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */"]
@@ -1761,6 +1842,30 @@ class SeoService {
   setMetaDescription(content) {
     this.meta.updateTag({
       name: 'description',
+      content: content
+    });
+  }
+  setMetaKey(content) {
+    this.meta.updateTag({
+      name: 'Keywords',
+      content: content
+    });
+  }
+  setMetaOrgUrl(content) {
+    this.meta.updateTag({
+      property: 'og:url',
+      content: content
+    });
+  }
+  setMetaOrgTitle(content) {
+    this.meta.updateTag({
+      property: 'og:title',
+      content: content
+    });
+  }
+  setMetaOrgDesc(content) {
+    this.meta.updateTag({
+      property: 'og:description',
       content: content
     });
   }
