@@ -1770,7 +1770,7 @@ class SeoService {
   }
   validateEmail(f) {
     const body = JSON.stringify(f);
-    return this.http.post('/api/validate', {
+    return this.http.post('/tools/api/validate', {
       b: body
     }, httpOptions).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(this.handleError('validateemail')));
   }
