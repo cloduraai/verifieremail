@@ -12,6 +12,7 @@
     "lint": "ng lint",
     "dev:ssr": "ng run verifyinbox:serve-ssr --port 4000",
     "serve:ssr": "node dist/server/main.js",
+    "server:ssr": "node server/main.js",
     "build:ssr": "ng build --configuration production --base-href /tools/",
     "prerender": "ng run verifyinbox:prerender"
   },
