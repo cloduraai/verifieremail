@@ -1255,7 +1255,6 @@ class HomeComponent {
       this.loadnsub.loading = true;
       this.loadnsub.btnLabel = 'Verifying';
       this.seoService.validateEmail(form.value).subscribe(res => {
-        console.log('', res);
         this.loadnsub.loading = false;
         this.loadnsub.submit = false;
         if (!res.success) {
@@ -1271,17 +1270,17 @@ class HomeComponent {
             this.loadnsub.btnLabel = 'Invalid';
           }
         }
+        setTimeout(() => {
+          this.loadnsub.reset = false;
+          this.loadnsub.btnLabel = 'Verify Email';
+          this.aFormGroup.reset();
+          // this.handleReset();
+          this.captchaElem.reloadCaptcha();
+        }, 3000);
       });
     } else {
       this.loadnsub.submit = false;
     }
-    setTimeout(() => {
-      this.loadnsub.reset = false;
-      this.loadnsub.btnLabel = 'Verify Email';
-      this.aFormGroup.reset();
-      // this.handleReset();
-      this.captchaElem.reloadCaptcha();
-    }, 3000);
   }
   handleReset() {
     this.captchaSuccess = false;
