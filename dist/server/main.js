@@ -308,17 +308,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [{
+  path: '',
+  component: _modules_general_landing_landing_component__WEBPACK_IMPORTED_MODULE_2__.LandingComponent
+}, {
   path: 'email-verifier',
   component: _modules_general_home_home_component__WEBPACK_IMPORTED_MODULE_0__.HomeComponent,
   pathMatch: 'full'
 }, {
-  path: '',
-  component: _modules_general_landing_landing_component__WEBPACK_IMPORTED_MODULE_2__.LandingComponent,
-  pathMatch: 'full'
-}, {
-  path: '**',
-  component: _modules_general_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_1__.NotFoundComponent,
-  pathMatch: 'full'
+  path: '*',
+  component: _modules_general_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_1__.NotFoundComponent
 }];
 class AppRoutingModule {}
 AppRoutingModule.ɵfac = function AppRoutingModule_Factory(t) {
@@ -329,7 +327,7 @@ AppRoutingModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__
 });
 AppRoutingModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({
   imports: [_angular_router__WEBPACK_IMPORTED_MODULE_4__.RouterModule.forRoot(routes, {
-    initialNavigation: 'enabledBlocking',
+    // initialNavigation: 'enabledBlocking',
     useHash: false,
     anchorScrolling: 'enabled',
     scrollPositionRestoration: 'enabled'
@@ -421,25 +419,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AppModule: () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/platform-browser */ 41081);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser */ 41081);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 59936);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-routing.module */ 11838);
-/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/service-worker */ 5826);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ 56448);
-/* harmony import */ var ngx_captcha__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ngx-captcha */ 26926);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ 8810);
+/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/service-worker */ 5826);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/http */ 56448);
+/* harmony import */ var ngx_captcha__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngx-captcha */ 26926);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/forms */ 8810);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ 96846);
 /* harmony import */ var _modules_general_home_home_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/general/home/home.component */ 73541);
 /* harmony import */ var _modules_general_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/general/not-found/not-found.component */ 20245);
 /* harmony import */ var _components_header_header_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/header/header.module */ 72215);
 /* harmony import */ var _components_footer_footer_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/footer/footer.module */ 2322);
 /* harmony import */ var _modules_general_landing_landing_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/general/landing/landing.component */ 22969);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common */ 34228);
 
 
 
 
 
  //<== captcha module
+
 
 
 
@@ -462,18 +462,22 @@ AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵd
   bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent]
 });
 AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjector"]({
-  imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_service_worker__WEBPACK_IMPORTED_MODULE_9__.ServiceWorkerModule.register('ngsw-worker.js', {
+  providers: [{
+    provide: _angular_common__WEBPACK_IMPORTED_MODULE_8__.APP_BASE_HREF,
+    useValue: "/tools/"
+  }],
+  imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_service_worker__WEBPACK_IMPORTED_MODULE_10__.ServiceWorkerModule.register('ngsw-worker.js', {
     enabled: !(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.isDevMode)(),
     // Register the ServiceWorker as soon as the application is stable
     // or after 30 seconds (whichever comes first).
     registrationStrategy: 'registerWhenStable:30000'
-  }), _angular_common_http__WEBPACK_IMPORTED_MODULE_10__.HttpClientModule, _components_header_header_module__WEBPACK_IMPORTED_MODULE_4__.HeaderModule, _components_footer_footer_module__WEBPACK_IMPORTED_MODULE_5__.FooterModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, ngx_captcha__WEBPACK_IMPORTED_MODULE_12__.NgxCaptchaModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.ReactiveFormsModule]
+  }), _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HttpClientModule, _components_header_header_module__WEBPACK_IMPORTED_MODULE_4__.HeaderModule, _components_footer_footer_module__WEBPACK_IMPORTED_MODULE_5__.FooterModule, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.FormsModule, ngx_captcha__WEBPACK_IMPORTED_MODULE_13__.NgxCaptchaModule, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.ReactiveFormsModule]
 });
 
 (function () {
   (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵsetNgModuleScope"](AppModule, {
     declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent, _modules_general_home_home_component__WEBPACK_IMPORTED_MODULE_2__.HomeComponent, _modules_general_landing_landing_component__WEBPACK_IMPORTED_MODULE_6__.LandingComponent, _modules_general_not_found_not_found_component__WEBPACK_IMPORTED_MODULE_3__.NotFoundComponent],
-    imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_service_worker__WEBPACK_IMPORTED_MODULE_9__.ServiceWorkerModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_10__.HttpClientModule, _components_header_header_module__WEBPACK_IMPORTED_MODULE_4__.HeaderModule, _components_footer_footer_module__WEBPACK_IMPORTED_MODULE_5__.FooterModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, ngx_captcha__WEBPACK_IMPORTED_MODULE_12__.NgxCaptchaModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.ReactiveFormsModule]
+    imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_9__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_service_worker__WEBPACK_IMPORTED_MODULE_10__.ServiceWorkerModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_11__.HttpClientModule, _components_header_header_module__WEBPACK_IMPORTED_MODULE_4__.HeaderModule, _components_footer_footer_module__WEBPACK_IMPORTED_MODULE_5__.FooterModule, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.FormsModule, ngx_captcha__WEBPACK_IMPORTED_MODULE_13__.NgxCaptchaModule, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.ReactiveFormsModule]
   });
 })();
 
@@ -582,7 +586,7 @@ FooterComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__[
   selectors: [["app-footer"]],
   decls: 69,
   vars: 1,
-  consts: [[1, "nga-footer"], [1, "container", "pt-5", "pb-1", "text-center", "text-lg-start"], [1, "row"], [1, "col-md-3", "col-xs-6", "col-sm-3", "col-lg-3", "mb-3"], [1, "h6", "text-16", "text-white"], [1, "list-unstyled", "text-white"], [1, "mb-2"], ["href", "https://clodura.ai/zoominfo-competitor", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/lusha-competitor", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/seamless-competitor", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/apollo-competitor", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/pricing/", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/our-data/", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/sales-prospecting-platform/", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/executives/", 1, "text-white", "text-15", "text-300"], ["href", "https://www.clodura.ai/affiliate-program/", 1, "text-white", "text-15", "text-300"], ["type", "button", "href", "mailto:support@clodura.ai", 1, "nga-btn-social", "nga-btn-social-i"], ["aria-hidden", "true", 1, "fas", "fa-envelope"], [1, "h6", "text-400", "text-white"], ["type", "button", "href", "https://www.linkedin.com/company/clodura-systems/", "aria-label", "Linkedin Clodura.AI", 1, "nga-btn-social", "nga-btn-social-i"], [1, "fab", "fa-linkedin-in"], ["type", "button", "href", "https://twitter.com/Clodura/", "aria-label", "Twitter Clodura.AI", 1, "nga-btn-social", "nga-btn-social-i"], [1, "fab", "fa-twitter"], ["type", "button", "href", "https://www.facebook.com/Clodura/", "aria-label", "Facebook Clodura.AI", 1, "nga-btn-social", "nga-btn-social-i"], [1, "fab", "fa-facebook"], ["type", "button", "href", "https://www.youtube.com/channel/UCozYAtSiPlYcDC85z94JTFw/", "aria-label", "Youtube Clodura.AI", 1, "nga-btn-social", "nga-btn-social-i"], [1, "fab", "fa-youtube"], [1, "h6", "text-13", "text-600", "text-white"], [1, "text-400", "text-12"], ["href", "https://chrome.google.com/webstore/detail/cloduraai-free-email-dire/edfgdiieipdlhkmmanhakhibhomfdjip", "target", "_blank", 1, "text-white", "nga-btn-chrome-extension"], ["display", "inline-block", 1, "text-white"], [1, "fab", "fa-chrome", "fa-lg", "mr-1"], [1, "py-3", "text-center", "bg-black"], [1, "container", "text-15", "text-grey"], [1, "fas", "fa-copyright"], ["href", "https://clodura.ai/privacy-policy/", 1, "text-grey"], ["href", "https://clodura.ai/gdpr/", 1, "text-grey"]],
+  consts: [[1, "nga-footer"], [1, "container", "pt-5", "pb-1", "text-center", "text-lg-start"], [1, "row"], [1, "col-md-3", "col-xs-6", "col-sm-3", "col-lg-3", "mb-3"], [1, "h6", "text-16", "text-white"], [1, "list-unstyled", "text-white"], [1, "mb-2"], ["href", "https://clodura.ai/zoominfo-competitor", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/lusha-competitor", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/seamless-competitor", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/apollo-competitor", 1, "text-white", "text-15", "text-300"], ["href", "https://www.clodura.ai/tools/email-verifier/", 1, "text-white", "text-15", "text-300"], ["href", "https://www.clodura.ai/database-center/", 1, "text-white", "text-15", "text-300"], ["href", "https://www.clodura.ai/blog/", 1, "text-white", "text-15", "text-300"], ["href", "https://clodura.ai/executives/", 1, "text-white", "text-15", "text-300"], ["href", "https://www.clodura.ai/affiliate-program/", 1, "text-white", "text-15", "text-300"], ["type", "button", "href", "mailto:support@clodura.ai", 1, "nga-btn-social", "nga-btn-social-i"], ["aria-hidden", "true", 1, "fas", "fa-envelope"], [1, "h6", "text-400", "text-white"], ["type", "button", "href", "https://www.linkedin.com/company/clodura-systems/", "aria-label", "Linkedin Clodura.AI", 1, "nga-btn-social", "nga-btn-social-i"], [1, "fab", "fa-linkedin-in"], ["type", "button", "href", "https://twitter.com/Clodura/", "aria-label", "Twitter Clodura.AI", 1, "nga-btn-social", "nga-btn-social-i"], [1, "fab", "fa-twitter"], ["type", "button", "href", "https://www.facebook.com/Clodura/", "aria-label", "Facebook Clodura.AI", 1, "nga-btn-social", "nga-btn-social-i"], [1, "fab", "fa-facebook"], ["type", "button", "href", "https://www.youtube.com/channel/UCozYAtSiPlYcDC85z94JTFw/", "aria-label", "Youtube Clodura.AI", 1, "nga-btn-social", "nga-btn-social-i"], [1, "fab", "fa-youtube"], [1, "col-md-3", "col-xs-6", "col-sm-6", "col-lg-3", "mb-3"], [1, "h6", "text-13", "text-600", "text-white"], [1, "text-400", "text-12"], ["href", "https://chrome.google.com/webstore/detail/cloduraai-free-email-dire/edfgdiieipdlhkmmanhakhibhomfdjip", "target", "_blank", 1, "btn", "btn-outline", "border", "border-white", "text-left", "px-0", "mx-0", "ps-2", "px-2", "py-3", "text-start", "text-15"], [1, "text-white"], [1, "fab", "fa-chrome", "fa-lg", "mr-1"], [1, "py-3", "text-center", "bg-black"], [1, "container", "text-15", "text-grey"], [1, "fas", "fa-copyright"], ["href", "https://clodura.ai/privacy-policy/", 1, "text-grey"], ["href", "https://clodura.ai/gdpr/", 1, "text-grey"]],
   template: function FooterComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "footer", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3)(4, "h2", 4);
@@ -601,13 +605,13 @@ FooterComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__[
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "Apollo.io Alternative");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 3)(20, "ul", 5)(21, "li", 6)(22, "a", 11);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](23, "Pricing");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](23, "Free Email Verifier Tool");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "li", 6)(25, "a", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, "Our Data");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, "Database Center");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "li", 6)(28, "a", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, "Platform");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, "Blogs");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "li", 6)(31, "a", 14);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, "Executives");
@@ -633,24 +637,24 @@ FooterComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__[
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](49, "a", 25);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](50, "i", 26);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](51, "div", 3)(52, "h2", 27);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](51, "div", 27)(52, "h2", 28);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](53, "Aggregate from LinkedIn & the Web");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](54, "p", 28);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](54, "p", 29);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](55, " Unlock & Connect to 600M contacts & direct dials. Target via your Cadence. Maximize your Leadgen Outreach. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](56, "a", 29)(57, "span", 30);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](58, "i", 31);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](56, "a", 30)(57, "span", 31);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](58, "i", 32);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](59, "\u00A0\u00A0 Clodura Chrome Extension ");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](60, "div", 32)(61, "div", 33);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](62, "i", 34);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](60, "div", 33)(61, "div", 34);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](62, "i", 35);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](63);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](64, "a", 35);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](64, "a", 36);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](65, "Privacy Policy");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](66, "\u00A0\u00A0|\u00A0\u00A0");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](67, "a", 36);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](67, "a", 37);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](68, "GDPR");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
     }
@@ -762,9 +766,9 @@ HeaderComponent.ɵfac = function HeaderComponent_Factory(t) {
 HeaderComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
   type: HeaderComponent,
   selectors: [["app-header"]],
-  decls: 73,
+  decls: 98,
   vars: 0,
-  consts: [[1, "navbar", "navbar-dark", "navbar-expand-lg", "fixed-top", "nav-pad-15", "nga-navbar"], ["aria-label", "Main navigation", 1, "container"], ["href", "/", "alt", "Clodura.AI", "aria-label", "Clodura.AI", 1, "navbar-brand"], ["src", "./assets/params/images/logo/clodura.ai.webp", "width", "200px", "height", "23px", "alt", "Clodura.AI Logo"], ["type", "button", "data-bs-toggle", "collapse", "data-bs-target", "#navbarCollapse", "aria-controls", "navbarCollapse", "aria-expanded", "false", "aria-label", "Toggle navigation", 1, "navbar-toggler"], [1, "navbar-toggler-icon"], ["id", "navbarCollapse", 1, "collapse", "navbar-collapse"], [1, "navbar-nav", "mx-auto"], [1, "navbar-nav", "me-auto"], [1, "nav-item", "dropdown"], ["aria-current", "page", "href", "/sales-prospecting-platform/", 1, "nav-link", "nga-nav-link"], [1, "nav-item"], ["aria-current", "page", "href", "/our-data/", 1, "nav-link", "nga-nav-link"], ["aria-current", "page", "href", "/pricing/", 1, "nav-link", "nga-nav-link"], ["aria-current", "page", "id", "dropdownMenuButton1", "data-bs-toggle", "dropdown", "href", "/database-center/", 1, "nav-link", "nga-nav-link", "dropdown-toggle"], ["aria-labelledby", "dropdownMenuButton1", 1, "dropdown-menu"], ["href", "/database-center/", 1, "dropdown-item"], ["href", "/blog/", 1, "dropdown-item"], ["href", "/webinar/", 1, "dropdown-item"], ["href", "/compare-with-us/", 1, "dropdown-item"], ["href", "/salesstreetvideos/", 1, "dropdown-item"], ["href", "/videos/", 1, "dropdown-item"], ["href", "/clodura-ai-product-tutorials/", 1, "dropdown-item"], ["aria-current", "page", "id", "dropdownMenuButton2", "data-bs-toggle", "dropdown", "href", "/our-happy-customers-clodura-ai/", 1, "nav-link", "nga-nav-link", "dropdown-toggle"], ["href", "/our-happy-customers-clodura-ai/", 1, "dropdown-item"], ["href", "/reviews", 1, "dropdown-item"], ["href", "/affiliate-program/", 1, "dropdown-item"], ["href", "/executives/", 1, "dropdown-item"], ["href", "/career/", 1, "dropdown-item"], ["aria-current", "page", "href", "https://app.clodura.ai/#/auth/login/", 1, "nav-link", "nga-nav-link"], ["type", "button", "href", "/app/#/auth/register?utm_source=Clodura&utm_medium=Tools&utm_campaign=Tools_Verification&utm_content=register", 1, "btn", "btn-sm", "btn-outline-light", "me-2", "button-free-sign-up", "text-white"], [1, "text-white"], ["type", "button", "href", "/request-demo?utm_source=Clodura&utm_medium=Tools&utm_campaign=Tools_Verification&utm_content=requeest-demo", 1, "btn", "btn-sm", "btn-outline-light", "me-2", "button-free-book-a-demo", "text-white"]],
+  consts: [[1, "navbar", "navbar-dark", "navbar-expand-lg", "fixed-top", "nav-pad-15", "nga-navbar"], ["aria-label", "Main navigation", 1, "container"], ["href", "/", "alt", "Clodura.AI", "aria-label", "Clodura.AI", 1, "navbar-brand"], ["src", "./assets/params/images/logo/clodura.ai.webp", "width", "200px", "height", "23px", "alt", "Clodura.AI Logo"], ["type", "button", "data-bs-toggle", "collapse", "data-bs-target", "#navbarCollapse", "aria-controls", "navbarCollapse", "aria-expanded", "false", "aria-label", "Toggle navigation", 1, "navbar-toggler"], [1, "navbar-toggler-icon"], ["id", "navbarCollapse", 1, "collapse", "navbar-collapse"], [1, "navbar-nav", "mx-auto"], [1, "navbar-nav", "me-auto"], [1, "nav-item", "dropdown"], ["aria-current", "page", "id", "dropdownMenuButtonProduct", "data-bs-toggle", "dropdown", "href", "/sales-prospecting-platform/", 1, "nav-link", "nga-nav-link", "dropdown-toggle"], ["aria-labelledby", "dropdownMenuButtonProduct", 1, "dropdown-menu"], ["href", "/b2b-data-lists/", 1, "dropdown-item"], ["href", "/direct-dials/", 1, "dropdown-item"], ["href", "/technology-install-base-data/", 1, "dropdown-item"], ["href", "/sales-intelligence/", 1, "dropdown-item"], ["href", "/sales-cadence/", 1, "dropdown-item"], ["href", "/custom-research/", 1, "dropdown-item"], ["href", "/integrations/", 1, "dropdown-item"], [1, "nav-item"], ["aria-current", "page", "href", "/our-data/", 1, "nav-link", "nga-nav-link"], ["aria-current", "page", "href", "/pricing/", 1, "nav-link", "nga-nav-link"], ["aria-current", "page", "id", "dropdownMenuButton1", "data-bs-toggle", "dropdown", "href", "/database-center/", 1, "nav-link", "nga-nav-link", "dropdown-toggle"], ["aria-labelledby", "dropdownMenuButton1", 1, "dropdown-menu"], ["href", "/database-center/", 1, "dropdown-item"], ["href", "/tools/email-verifier/", 1, "dropdown-item"], ["href", "/blog/", 1, "dropdown-item"], ["href", "/webinar/", 1, "dropdown-item"], ["href", "/compare-with-us/", 1, "dropdown-item"], ["href", "/salesstreetvideos/", 1, "dropdown-item"], ["href", "/videos/", 1, "dropdown-item"], ["href", "/clodura-ai-product-tutorials/", 1, "dropdown-item"], ["aria-current", "page", "id", "dropdownMenuButton2", "data-bs-toggle", "dropdown", "href", "/our-happy-customers-clodura-ai/", 1, "nav-link", "nga-nav-link", "dropdown-toggle"], ["href", "/our-happy-customers-clodura-ai/", 1, "dropdown-item"], ["href", "/reviews", 1, "dropdown-item"], ["href", "/affiliate-program/", 1, "dropdown-item"], ["href", "/executives/", 1, "dropdown-item"], ["href", "/career/", 1, "dropdown-item"], ["aria-current", "page", "href", "https://app.clodura.ai/#/auth/login/", 1, "nav-link", "nga-nav-link"], ["type", "button", "href", "/app/#/auth/register?utm_source=Clodura&utm_medium=Tools&utm_campaign=Tools_Verification&utm_content=register", 1, "btn", "btn-sm", "btn-outline-light", "me-2", "button-free-sign-up", "text-white"], [1, "text-white"], ["type", "button", "href", "/request-demo?utm_source=Clodura&utm_medium=Tools&utm_campaign=Tools_Verification&utm_content=requeest-demo", 1, "btn", "btn-sm", "btn-outline-light", "me-2", "button-free-book-a-demo", "text-white"]],
   template: function HeaderComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "header", 0)(1, "nav", 1)(2, "a", 2);
@@ -777,63 +781,87 @@ HeaderComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__[
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](7, "ul", 7);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "ul", 8)(9, "li", 9)(10, "a", 10);
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](11, "Product");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "li", 11)(13, "a", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, " Our Data");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "li", 11)(16, "a", 13);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](17, " Pricing");
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "li", 9)(19, "a", 14);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](20, " Resources");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "ul", 15)(22, "li")(23, "a", 16);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "Database Center");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "ul", 11)(13, "li")(14, "a", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](15, "B2B Data Lists");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "li")(26, "a", 17);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "Blogs");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "li")(17, "a", 13);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "Direct Dials");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "li")(29, "a", 18);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "Webinar");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "li")(20, "a", 14);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "Technology Install Base Data");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "li")(32, "a", 19);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](33, "Compare With Us");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "li")(23, "a", 15);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "Sales Intelligence");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "li")(35, "a", 20);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](36, "Sales Street Videos");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "li")(26, "a", 16);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "Sales Cadence");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "li")(38, "a", 21);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](39, "Videos");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "li")(29, "a", 17);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](30, "Custom Research");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](40, "li")(41, "a", 22);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](42, "Tutorials");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "li")(32, "a", 18);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](33, "Integration");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](43, "li", 9)(44, "a", 23);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](45, " Company");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "li", 19)(35, "a", 20);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](36, " Our Data");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "li", 19)(38, "a", 21);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](39, " Pricing");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](40, "li", 9)(41, "a", 22);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](42, " Resources");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](46, "ul", 15)(47, "li")(48, "a", 24);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](49, "Customers");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](43, "ul", 23)(44, "li")(45, "a", 24);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](46, "Database Center");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](50, "li")(51, "a", 25);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](52, "Reviews");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](47, "li")(48, "a", 25);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](49, "Free Tools");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](53, "li")(54, "a", 26);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](55, "Affiliate Program");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](50, "li")(51, "a", 26);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](52, "Blogs");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](56, "li")(57, "a", 27);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](58, "Executives");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](53, "li")(54, "a", 27);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](55, "Webinar");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](59, "li")(60, "a", 28);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](61, "Career");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](56, "li")(57, "a", 28);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](58, "Compare With Us");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](59, "li")(60, "a", 29);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](61, "Sales Street Videos");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](62, "li")(63, "a", 30);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](64, "Videos");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](65, "li")(66, "a", 31);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](67, "Tutorials");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](62, "li", 11)(63, "a", 29);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](64, " Login ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](68, "li", 9)(69, "a", 32);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](70, " Company");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](71, "ul", 23)(72, "li")(73, "a", 33);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](74, "Customers");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](65, "li", 11)(66, "a", 30)(67, "span", 31);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](68, "Free Sign up");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](75, "li")(76, "a", 34);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](77, "Reviews");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](78, "li")(79, "a", 35);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](80, "Affiliate Program");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](81, "li")(82, "a", 36);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](83, "Executives");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](84, "li")(85, "a", 37);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](86, "Career");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](87, "li", 19)(88, "a", 38);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](89, " Login ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](90, "li", 19)(91, "a", 39)(92, "span", 40);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](93, "Free Sign up");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](69, "li", 11)(70, "a", 32)(71, "span", 31);
-      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](72, "Book A Demo");
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](94, "li", 19)(95, "a", 41)(96, "span", 40);
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](97, "Book A Demo");
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]()()()()()()();
     }
   },
@@ -1792,7 +1820,7 @@ LandingComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__
   selectors: [["app-home"]],
   decls: 83,
   vars: 0,
-  consts: [[1, "container"], [1, "row", "my-5", "bg-one", "shadow", "shadow-md", "rounded"], [1, "col-2", "float-end", "my-auto"], ["src", "https://storage.googleapis.com/clodura-sitemap-app-01/statassets/assets/params/images/images/toolsicon.png", "alt", "toolsicon", "height", "64px", 1, "float-end"], [1, "col-8"], [1, "card", "bg-transparent", "border-0"], [1, "card-body"], [1, "col-2"], [1, "row", "mt-5", "mb-5"], [1, "col-4", "my-2", "d-flex", "align-items-stretch"], ["href", "/tools/email-verifier"], [1, "card", "pointer", "bg-linen"], [1, "card-title"], [1, "card-text", "text-14"], [1, "card", "w-100"], [1, "my-5"]],
+  consts: [[1, "container"], [1, "row", "my-5", "bg-one", "shadow", "shadow-md", "rounded"], [1, "col-2", "float-end", "my-auto"], ["src", "https://storage.googleapis.com/clodura-sitemap-app-01/statassets/assets/params/images/images/toolsicon.png", "alt", "toolsicon", "height", "64px", 1, "float-end"], [1, "col-8"], [1, "card", "bg-transparent", "border-0"], [1, "card-body"], [1, "col-2"], [1, "row", "mt-5", "mb-5"], [1, "col-4", "my-2", "d-flex", "align-items-stretch"], ["href", "/email-verifier"], [1, "card", "pointer", "bg-linen"], [1, "card-title"], [1, "card-text", "text-14"], [1, "card", "w-100"], [1, "my-5"]],
   template: function LandingComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "div", 1)(2, "div", 2);
