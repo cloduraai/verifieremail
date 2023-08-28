@@ -52,16 +52,18 @@ export function app(): express.Express {
     const con = req.headers?.cookie?.split(';')[0].split('=')[0] || '';
     const cs = createHash('sha3-256').update(con).digest('hex');
     // console.log('', a.email);
-    console.log(cs);
-    const getKey = await redis.get(cs);
+    // console.log(cs);
+    let getKey = await redis.get(cs);
 
     if(getKey) {
       console.log('key from redis', getKey);
+    } else {
+      getKey = '0';
     }
-    if (Number(getKey) < 5) {
+    console.log("", getKey);
+    if (Number(getKey) < 11) {
       if (a.recaptcha) {
         const b = await validateCaptcha(a.recaptcha);
-        redis.set(cs, Number(getKey) + 1, 'EX', 24 * 60 * 60);
         if (b.success) {
           if (a.email && EmailValidator.validate(a.email)) {
             const docs = await coll.findOne({ email: a.email });
@@ -70,14 +72,31 @@ export function app(): express.Express {
               // const c = _.extend(docs, {success: true})
               res.status(200).send(docs);
             } else {
+              let c = {
+                valid: '',
+                confidence: '',
+                email: '',
+                status: '',
+                reason: '',
+                domain: '',
+                isfree: false,
+                isDisposable: false,
+                isCatchAll: false,
+                MX: '',
+                format: EmailValidator.validate(a.email) ? 'Valid' : 'Invalid',
+                success: true,
+                code: 0
+
+              };
               axios
                 .get(
                   `https://api.ValidEmail.net/?email=${a.email}&token=69d372749aa94cb793fb75905608642f`
                 )
                 .then(function (response: any) {
                   // handle success
+                  console.log('ValidEmail');
                   console.log(response.data);
-                  const b = {
+                  c = {
                     valid: response.data?.IsValid,
                     confidence: response.data?.Score,
                     email: response.data?.Email,
@@ -89,11 +108,38 @@ export function app(): express.Express {
                     isCatchAll: response.data?.AcceptAll,
                     MX: response.data?.MXRecord,
                     format: EmailValidator.validate(a.email) ? 'Valid' : 'Invalid',
+                    code: 0,
                     success: true
                   };
-                  insertreq(b);
+                  axios.get(
+                    `https://api.millionverifier.com/api/v3/?api=8J2iR2jYgI4ULrBzpj5mYaMrx&email=${a.email}&timeout=9`
+                  ).then((millResponse: any) => {
+                  // handle success
+                    c.status = millResponse.data.quality;
+                    c.reason = millResponse.data.result;
+                    c.isfree = millResponse.data?.free;
+                    switch(millResponse.data.resultCode) {
+                      case 2:
+                        c.isCatchAll = true;
+                        break;
+                      case 5:
+                        c.isDisposable = true;
+                        break;
+                      case 6:
+                        c.code = 4;
+                        c.status = 'err';
+                        c.reason = millResponse.data.subresult;
+                        break;
+                    }
+                    console.log('MillionVerifier');
+                    console.log(millResponse.data);
+                    insertreq(c);
+                    res.send(c);
+                  }).catch((err: any) => {
+                    console.log(err);
+                    res.send({ success: false, err: 'server error, please try after sometime' });
+                  });
 
-                  res.send(b);
                 })
                 .catch(function (error: any) {
                   // handle error
@@ -107,6 +153,8 @@ export function app(): express.Express {
         } else {
           res.send({ success: false, err: 'invalid captcha', type: 'bot' });
         }
+        redis.set(cs, Number(getKey) + 1, 'EX', 24 * 60 * 60);
+
       } else {
           res.send({ success: false, err: 'captacha invalid or missing', type:'bot' });
       }
