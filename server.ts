@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import 'zone.js/node';
 
 import { APP_BASE_HREF } from '@angular/common';
@@ -11,6 +12,24 @@ import * as EmailValidator from 'email-validator';
 import { MongoClient } from 'mongodb';
 import Redis from 'ioredis';
 import { createHash } from 'node:crypto';
+// const Wappalyzer = require('wappalyzer');
+
+// const options = {
+// debug: false,
+// delay: 500,
+// headers: {},
+// maxDepth: 3,
+// maxUrls: 10,
+// maxWait: 5000,
+// recursive: true,
+// probe: true,
+// proxy: false,
+// userAgent: 'buwdevwith-analyzer',
+// htmlMaxCols: 2000,
+// htmlMaxRows: 2000,
+// noScripts: false,
+// noRedirect: false,
+// };
 // import * as _ from "lodash";
 
 const url = 'mongodb://127.0.0.1:27017';
@@ -55,12 +74,12 @@ export function app(): express.Express {
     // console.log(cs);
     let getKey = await redis.get(cs);
 
-    if(getKey) {
+    if (getKey) {
       console.log('key from redis', getKey);
     } else {
       getKey = '0';
     }
-    console.log("", getKey);
+    console.log('', getKey);
     if (Number(getKey) < 11) {
       if (a.recaptcha) {
         const b = await validateCaptcha(a.recaptcha);
@@ -85,8 +104,7 @@ export function app(): express.Express {
                 MX: '',
                 format: EmailValidator.validate(a.email) ? 'Valid' : 'Invalid',
                 success: true,
-                code: 0
-
+                code: 0,
               };
               axios
                 .get(
@@ -107,44 +125,54 @@ export function app(): express.Express {
                     isDisposable: response.data?.Disposable,
                     isCatchAll: response.data?.AcceptAll,
                     MX: response.data?.MXRecord,
-                    format: EmailValidator.validate(a.email) ? 'Valid' : 'Invalid',
+                    format: EmailValidator.validate(a.email)
+                      ? 'Valid'
+                      : 'Invalid',
                     code: 0,
-                    success: true
+                    success: true,
                   };
-                  axios.get(
-                    `https://api.millionverifier.com/api/v3/?api=8J2iR2jYgI4ULrBzpj5mYaMrx&email=${a.email}&timeout=9`
-                  ).then((millResponse: any) => {
-                  // handle success
-                    c.status = millResponse.data.quality;
-                    c.reason = millResponse.data.result;
-                    c.isfree = millResponse.data?.free;
-                    switch(millResponse.data.resultCode) {
-                      case 2:
-                        c.isCatchAll = true;
-                        break;
-                      case 5:
-                        c.isDisposable = true;
-                        break;
-                      case 6:
-                        c.code = 4;
-                        c.status = 'err';
-                        c.reason = millResponse.data.subresult;
-                        break;
-                    }
-                    console.log('MillionVerifier');
-                    console.log(millResponse.data);
-                    insertreq(c);
-                    res.send(c);
-                  }).catch((err: any) => {
-                    console.log(err);
-                    res.send({ success: false, err: 'server error, please try after sometime' });
-                  });
-
+                  axios
+                    .get(
+                      `https://api.millionverifier.com/api/v3/?api=8J2iR2jYgI4ULrBzpj5mYaMrx&email=${a.email}&timeout=9`
+                    )
+                    .then((millResponse: any) => {
+                      // handle success
+                      c.status = millResponse.data.quality;
+                      c.reason = millResponse.data.result;
+                      c.isfree = millResponse.data?.free;
+                      switch (millResponse.data.resultCode) {
+                        case 2:
+                          c.isCatchAll = true;
+                          break;
+                        case 5:
+                          c.isDisposable = true;
+                          break;
+                        case 6:
+                          c.code = 4;
+                          c.status = 'err';
+                          c.reason = millResponse.data.subresult;
+                          break;
+                      }
+                      console.log('MillionVerifier');
+                      console.log(millResponse.data);
+                      insertreq(c);
+                      res.send(c);
+                    })
+                    .catch((err: any) => {
+                      console.log(err);
+                      res.send({
+                        success: false,
+                        err: 'server error, please try after sometime',
+                      });
+                    });
                 })
                 .catch(function (error: any) {
                   // handle error
                   console.log(error);
-                  res.send({ success: false, err: 'server error, please try after sometime' });
+                  res.send({
+                    success: false,
+                    err: 'server error, please try after sometime',
+                  });
                 });
             }
           } else {
@@ -154,12 +182,104 @@ export function app(): express.Express {
           res.send({ success: false, err: 'invalid captcha', type: 'bot' });
         }
         redis.set(cs, Number(getKey) + 1, 'EX', 24 * 60 * 60);
-
       } else {
-          res.send({ success: false, err: 'captacha invalid or missing', type:'bot' });
+        res.send({
+          success: false,
+          err: 'captacha invalid or missing',
+          type: 'bot',
+        });
       }
     } else {
-      res.send({ success: false, err: 'You have exhausted daily search limit.', type: 'limit' });
+      res.send({
+        success: false,
+        err: 'You have exhausted daily search limit.',
+        type: 'limit',
+      });
+    }
+  });
+
+  server.post('/tools/api/discover', async (req, res) => {
+    const db = await client.db('validemaildb');
+    const coll = db.collection('emailook');
+    console.log(req.headers.cookie);
+    const a = JSON.parse(req.body.b);
+    const con =
+      req.headers?.cookie?.split(';')[0].split('=')[0] + 'websiteanalyzer' ||
+      '';
+    const cs = createHash('sha3-256').update(con).digest('hex');
+    // console.log('', a.email);
+    // console.log(cs);
+    let getKey = await redis.get(cs);
+
+    if (getKey) {
+      console.log('key from redis', getKey);
+    } else {
+      getKey = '0';
+    }
+    console.log('', getKey);
+    if (Number(getKey) < 11) {
+      if (a.recaptcha) {
+        const b = await validateCaptcha(a.recaptcha);
+        if (b.success) {
+          if (a.email && EmailValidator.validate(a.email)) {
+            const docs = await coll.findOne({ email: a.email });
+            if (docs) {
+              console.log('responding from docs');
+              // const c = _.extend(docs, {success: true})
+              res.status(200).send(docs);
+            } else {
+              axios
+                .get(`http://localhost:3321/url/${a.email}`)
+                .then(function (response: any) {
+                  // handle success
+                  console.log('ValidEmail');
+                  console.log(response.data);
+                  const a = [];
+                  if (response.data && response.data.length > 0) {
+                    for (const iterator of response.data) {
+                      const b = iterator.categories.map((c: any) => c.name);
+                      a.push({
+                        name: iterator.name,
+                        description: iterator.description,
+                        icon: iterator.icon,
+                        categories: b,
+                      });
+
+                    }
+                    res.send(a);
+                  } else {
+                    res.send({});
+                  }
+                })
+                .catch(function (error: any) {
+                  // handle error
+                  console.log(error);
+                  res.send({
+                    success: false,
+                    err: 'server error, please try after sometime',
+                  });
+                });
+            }
+          } else {
+            res.send({ success: false, err: 'email invalid or missing' });
+          }
+        } else {
+          res.send({ success: false, err: 'invalid captcha', type: 'bot' });
+        }
+        redis.set(cs, Number(getKey) + 1, 'EX', 24 * 60 * 60);
+      } else {
+        res.send({
+          success: false,
+          err: 'captacha invalid or missing',
+          type: 'bot',
+        });
+      }
+    } else {
+      res.send({
+        success: false,
+        err: 'You have exhausted daily search limit.',
+        type: 'limit',
+      });
     }
   });
 
