@@ -2776,7 +2776,7 @@ LandingComponent.ɵfac = function LandingComponent_Factory(t) {
 };
 LandingComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
   type: LandingComponent,
-  selectors: [["app-home"]],
+  selectors: [["app-landing"]],
   decls: 89,
   vars: 0,
   consts: [[1, "container"], [1, "row", "my-5", "bg-one", "shadow", "shadow-md", "rounded"], [1, "col-2", "float-end", "my-auto"], ["src", "https://storage.googleapis.com/clodura-sitemap-app-01/statassets/assets/params/images/images/toolsicon.png", "alt", "toolsicon", "height", "64px", 1, "float-end"], [1, "col-8"], [1, "card", "bg-transparent", "border-0"], [1, "card-body"], [1, "col-2"], [1, "row", "mt-5", "mb-5"], [1, "col-4", "my-2", "d-flex", "align-items-stretch"], ["href", "/tools/email-verifier"], [1, "card", "pointer", "bg-linen"], [1, "card-title"], [1, "card-text", "text-14"], ["href", "https://kb.clodura.ai/tools/spf"], [1, "text-12"], [1, "fas", "fa-external-link-alt"], ["href", "https://kb.clodura.ai/tools/dmarc"], [1, "card", "w-100"], [1, "my-5"]],
@@ -2800,7 +2800,7 @@ LandingComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](20, " Verify emails with our fast and powerful Email Verifying engine. ");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()();
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "div", 9)(22, "a", 14)(23, "div", 11)(24, "div", 6)(25, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](26, "SPF Generator ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](26, "SPF Record Generator ");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "small", 15);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](28, "i", 16);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
@@ -2808,7 +2808,7 @@ LandingComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](30, "Create a valid SPF record in a few clicks to use it in your Name Server/DNS.");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()()()();
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](31, "div", 9)(32, "a", 17)(33, "div", 11)(34, "div", 6)(35, "h4", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](36, "DMARC Generatorn ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](36, "DMARC Record Generator ");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](37, "small", 15);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](38, "i", 16);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
